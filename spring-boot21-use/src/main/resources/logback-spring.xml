@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include
+		resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<property name="LOG_HOME" value="/data/learning-logs" />
+	<property name="LOG_HOME_ING" value="${LOG_HOME}/ing" />
+	<property name="DEFAULT_LOG_FILE" value="sb21.sys.log" />
+
+	<!-- appender: default file appender -->
+	<appender name="default.file.log"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<file>${LOG_HOME_ING}/${DEFAULT_LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/sys/%d{yyyyMMdd}.${DEFAULT_LOG_FILE}
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd
+				HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t]
+				%-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="default.file.log" />
+	</root>
+
+</configuration>
