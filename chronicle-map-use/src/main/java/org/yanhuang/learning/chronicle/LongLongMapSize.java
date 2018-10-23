@@ -13,7 +13,7 @@ public class LongLongMapSize {
 				.of(Md5Key.class, Long.class)
 				.averageKeySize(16)
 				.maxBloatFactor(1.0)
-				.entries(10000000)
+				.entries(50000000)
 				.createOrRecoverPersistedTo(Paths.get("/temp/cmap-t1.dat").toFile(), false);
 		longEntryMap.close();
 	}
